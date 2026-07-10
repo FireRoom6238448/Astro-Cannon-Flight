@@ -1,0 +1,6 @@
+{
+  "name": "Asteroid Evasion",
+  "description": "A 3D spaceship game in an asteroid field built with Three.js and Cannon-es.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
