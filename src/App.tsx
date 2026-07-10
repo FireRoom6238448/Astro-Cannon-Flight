@@ -17,7 +17,12 @@ export default function App() {
   const [gameState, setGameState] = useState<GameState>('START');
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [highScore, setHighScore] = useState(() => {
-    return parseInt(localStorage.getItem('asteroidEvasion_highScore') || '0', 10);
+    try {
+      return parseInt(localStorage.getItem('asteroidEvasion_highScore') || '0', 10);
+    } catch (e) {
+      console.warn('localStorage not available', e);
+      return 0;
+    }
   });
   const gameRef = useRef<Game | null>(null);
 
@@ -38,7 +43,11 @@ export default function App() {
       setGameState('GAME_OVER');
       setHighScore((prev) => {
         if (finalScoreRef.current > prev) {
-          localStorage.setItem('asteroidEvasion_highScore', finalScoreRef.current.toString());
+          try {
+            localStorage.setItem('asteroidEvasion_highScore', finalScoreRef.current.toString());
+          } catch (e) {
+            console.warn('localStorage not available', e);
+          }
           return finalScoreRef.current;
         }
         return prev;
